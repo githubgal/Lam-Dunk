@@ -49,4 +49,6 @@
  * so, the robot will await a switch to another mode or disable/enable cycle.
  */
 void autonomous() {
+	for(int x = 1; x <=10; x++)
+		motorSet(x, 20);
 }
