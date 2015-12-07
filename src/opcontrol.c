@@ -57,12 +57,12 @@ void operatorControl() {
 		int shooterInput = joystickGetAnalog(1,3);
 		int liftInput = joystickGetAnalogy(1,2);
 
-		for(int i = 1;i < 5; i++)
+		for(int i = 4;i < 8; i++)
 		{
 			motorset(i, shooterInput);
 		}
 
-		motorset(5, liftInput);
+		motorset(1, liftInput);
 
 		delay(20);
 
