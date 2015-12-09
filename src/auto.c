@@ -50,5 +50,10 @@
  */
 void autonomous() {
 	for(int x = 1; x <=10; x++)
-		motorSet(x, 20);
+	{
+		for(int y = 0; y<=(int)(.9*127); y++)
+		{
+			motorSet(x, y);
+		}
+	}
 }
