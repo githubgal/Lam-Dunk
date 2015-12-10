@@ -50,6 +50,7 @@
 extern "C" {
 #endif
 
+
 // A function prototype looks exactly like its declaration, but with a semicolon instead of
 // actual code. If a function does not match a prototype, compile errors will occur.
 
@@ -92,6 +93,10 @@ void initializeIO();
  * will not start. An autonomous mode selection menu like the pre_auton() in other environments
  * can be implemented in this task if desired.
  */
+
+void intake();
+//intake
+
 void initialize();
 /**
  * Runs the user operator control code. This function will be started in its own task with the
