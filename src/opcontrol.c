@@ -54,14 +54,40 @@
 void operatorControl() {
 
 	while (1) {
-		int shooterInput = joystickGetAnalog(1,3);
+
+		//initializes intake
+		intake();
+
+		//sets shooter and lift input
 		int liftInput = joystickGetAnalog(1,2);
-		for(int i = 4;i < 8; i++)
+
+		if(joystickGetDigital(1, 6, JOY_UP))
 		{
-			motorSet(i, shooterInput);
+		//sets shooter speed to each motor
+		    for(int i = 4;i < 8; i++)
+		    {
+			    motorSet(i, (int)(127*0.9));
+		    }
+
 		}
 
-		motorSet(1, liftInput);
+		//sets lift
+		if (joystickGetDigital(1, 5, JOY_UP))
+		{
+		     motorSet(10, 127);
+		}
+		else if (joystickGetDigital(1, 5, JOY_DOWN))
+		{
+		      motorSet(10, -127);
+		}
+		else
+		{
+		      motorSet(10, 0);
+		}
+
+
+
+
 
 		delay(20);
 
