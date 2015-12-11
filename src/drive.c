@@ -39,11 +39,9 @@ const unsigned int TrueSpeed[256] = {
 
 void drive() {
     int y = joystickGetAnalog(1, 1);
-    //one positive up
 
 
     int x = joystickGetAnalog(1, 3);
-    //3 positive left
 
 
     driveSet(y, x);
@@ -57,11 +55,11 @@ void driveSet(int y, int x) {
 }
 
 void driveSetLeft(int speed) {
-  motorSet(8, speed);
-  motorSet(9, -speed);
+  motorSet(8, -speed);
+  motorSet(9, speed);
 }
 
 void driveSetRight(int speed) {
-  motorSet(2, speed);
-  motorSet(3, -speed);
+  motorSet(2, -speed);
+  motorSet(3, speed);
 }
