@@ -34,6 +34,8 @@
 
 #include "main.h"
 
+#define DRIVETIME 1500
+
 /*
  * Runs the user autonomous code. This function will be started in its own task with the default
  * priority and stack size whenever the robot is enabled via the Field Management System or the
@@ -49,11 +51,24 @@
  * so, the robot will await a switch to another mode or disable/enable cycle.
  */
 void autonomous() {
-	for(int x = 1; x <=10; x++)
+
+	setShooter((int)(0.9 * 127));
+	//sets drive train motors to 90% power
+	driveSetLeft((int)(0.9 * 127));
+	driveSetRight((int)(0.9 *127));
+
+	//drives forward until drivetime is up
+	delay(DRIVETIME);
+
+	//stops motors
+	driveSetLeft(0);
+	driveSetRight(0);
+
+	//turns on intake and shooter
+	while(1)
 	{
-		for(int y = 0; y<=(int)(.9*127); y++)
-		{
-			motorSet(x, y);
-		}
+		motorSet(1, (int)(0.9 * 127));
+		motorSet(10, (int)(0.9 * 127));
+		delay(20);
 	}
 }

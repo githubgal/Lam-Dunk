@@ -1,10 +1,7 @@
 #include "main.h"
 
-#define JOYSTICK_DEADZONE 15 // deadzone per channel
 
-void driveSet(int Y, int X);
-void driveSetLeft(int speed);
-void driveSetRight(int speed);
+
 
 // linearizing array, goes to 256 to save CPU cycles; xmax + ymax = 256
 const unsigned int TrueSpeed[256] = {
@@ -37,49 +34,40 @@ const unsigned int TrueSpeed[256] = {
   127, 127, 127, 127, 127, 127, 127, 127
 };
 
-int X = 0, Y = 0;
-int tempX = 0;
-int tempY = 0;
-int tempXPartner = 0;
-int tempYPartner = 0;
 
-void DriveTask(void *ignore) {
-  while (1) {
-    tempX = joystickGetAnalog(1, 1);
-    tempY = joystickGetAnalog(1, 3);
-    tempXPartner = joystickGetAnalog(2, 1);
-    tempYPartner = joystickGetAnalog(2, 3);
 
-    if (abs(tempYPartner) > JOYSTICK_DEADZONE) { // check if partner overrides Y
-      Y = -tempYPartner / 2;
-    } else {
-      Y = -tempY;
+
+void drive() {
+    int y = joystickGetAnalog(1, 1);
+    int x = joystickGetAnalog(1, 3);
+
+    //Sets motor to 0 if below deadzone
+    if(abs(x) < 15)
+    {
+    	x = 0;
+    }
+    if(abs(y) < 15)
+    {
+    	y = 0;
     }
 
-    if (abs(tempXPartner) > JOYSTICK_DEADZONE) { // check if partner overrides X
-      X = tempXPartner / 2;
-    } else {
-      X = tempX;
-    }
 
-    driveSet(Y, X);
+    driveSet(y, x);
 
-    taskDelay(25);
-  }
 }
 
-void driveSet(int Y, int X) {
+void driveSet(int y, int x) {
   // set drive speed to linearized PWM
-  driveSetLeft(signum(Y - X) * TrueSpeed[abs(Y - X)]);
-  driveSetRight(signum(Y + X) * TrueSpeed[abs(Y + X)]);
+  driveSetLeft(signum(y - x) * TrueSpeed[abs(y - x)]);
+  driveSetRight(signum(y + x) * TrueSpeed[abs(y + x)]);
 }
 
 void driveSetLeft(int speed) {
-  motorSet(8, speed);
-  motorSet(9, -speed);
+  motorSet(8, -speed);
+  motorSet(9, speed);
 }
 
 void driveSetRight(int speed) {
-  motorSet(2, speed);
-  motorSet(3, -speed);
+  motorSet(2, -speed);
+  motorSet(3, speed);
 }

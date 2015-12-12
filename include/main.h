@@ -47,10 +47,15 @@
 
 #define signum(x) ((x > 0) - (x < 0))
 
+#define DRIVETIME 1500
+
+
+
 // Allow usage of this file in C++ programs
 #ifdef __cplusplus
 extern "C" {
 #endif
+
 
 // A function prototype looks exactly like its declaration, but with a semicolon instead of
 // actual code. If a function does not match a prototype, compile errors will occur.
@@ -94,6 +99,34 @@ void initializeIO();
  * will not start. An autonomous mode selection menu like the pre_auton() in other environments
  * can be implemented in this task if desired.
  */
+
+void drive();
+//drive
+
+
+void driveSet(int Y, int X);
+void driveSetLeft(int speed);
+void driveSetRight(int speed);
+//the three methods above set drive motor speeds
+
+void tankDrive();
+//getting values for tankdrive
+
+void tankDriveSet();
+//setting motor values for tankdrive
+
+int signOf(int n);
+//returns sign of number ex: -1 or 1
+
+void shoot();
+
+
+void intake();
+//intake
+
+void setShooter(int speed);
+//sets shooter to speed
+
 void initialize();
 /**
  * Runs the user operator control code. This function will be started in its own task with the

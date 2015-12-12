@@ -54,14 +54,16 @@
 void operatorControl() {
 
 	while (1) {
-		int shooterInput = joystickGetAnalog(1,3);
-		int liftInput = joystickGetAnalog(1,2);
-		for(int i = 4;i < 8; i++)
-		{
-			motorSet(i, shooterInput);
-		}
 
-		motorSet(1, liftInput);
+
+		//sets drive motors
+		drive();
+
+		//sets intake motors
+		intake();
+
+		//sets shooter motors
+        shoot();
 
 		delay(20);
 
