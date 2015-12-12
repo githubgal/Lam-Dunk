@@ -1,9 +1,4 @@
-/*
- * tankdrive.c
- *
- *  Created on: Dec 10, 2015
- *      Author: fibbonacci
- */
+
 #include "main.h"
 
 const unsigned int TrueSpeedSingle[128] =
