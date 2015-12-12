@@ -39,9 +39,17 @@ const unsigned int TrueSpeed[256] = {
 
 void drive() {
     int y = joystickGetAnalog(1, 1);
-
-
     int x = joystickGetAnalog(1, 3);
+
+    //Sets motor to 0 if below deadzone
+    if(abs(x) < 15)
+    {
+    	x = 0;
+    }
+    if(abs(y) < 15)
+    {
+    	y = 0;
+    }
 
 
     driveSet(y, x);

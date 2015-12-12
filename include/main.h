@@ -47,6 +47,10 @@
 
 #define signum(x) ((x > 0) - (x < 0))
 
+#define DRIVETIME 1500
+
+
+
 // Allow usage of this file in C++ programs
 #ifdef __cplusplus
 extern "C" {
@@ -114,10 +118,14 @@ void tankDriveSet();
 int signOf(int n);
 //returns sign of number ex: -1 or 1
 
+void shoot();
 
 
 void intake();
 //intake
+
+void setShooter(int speed);
+//sets shooter to speed
 
 void initialize();
 /**
